@@ -13,7 +13,9 @@ creator:
 
 > ***Note:*** _This can be a pair programming activity or done independently._
 
-In this lab, we will be continuing our work on the Grocery List: when the user clicks on one of the grocery items, your app will navigate to a new activity that will display extra details about the item. By the end of the lab, your database should also contain extra columns for `description`, `price`, and `type`.
+In this lab, we will be continuing our work on the Grocery List: when the user clicks on one of the grocery items, your app will navigate to a new activity that will display extra details about the item. The details you need to display are already stored in the columns for `description`, `price`, and `type`. See the screenshots below for an example.
+
+<img src="./screenshots/database.png">
 
 ## Exercise
 
