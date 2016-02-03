@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import ly.generalassemb.drewmahrt.shoppinglistwithdetailview.setup.DBAssetHelper;
 
@@ -44,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                cursor.moveToPosition(position);
-                intent.putExtra("id", cursor.getInt(cursor.getColumnIndex(ShoppingSQLiteOpenHelper.COL_ID)));
+                //cursor.moveToPosition(position);
+                TextView textView = (TextView)view.findViewById(android.R.id.text1);
+                String itemName = textView.getText().toString();
+                int theID = ShoppingSQLiteOpenHelper.getInstance(MainActivity.this).getIdByName(itemName);
+                intent.putExtra("id", theID);
                 startActivity(intent);
             }
         });

@@ -118,6 +118,23 @@ public class ShoppingSQLiteOpenHelper extends SQLiteOpenHelper{
 
         return cursor;
     }
+    public int getIdByName(String name){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(SHOPPING_LIST_TABLE_NAME, // a. table
+                new String[] {COL_ID}, // b. column names
+                COL_ITEM_NAME + "= ?", // c. selections
+                new String[]{name}, // d. selections args
+                null, // e. group by
+                null, // f. having
+                null, // g. order by
+                null); // h. limit
+        if(cursor.moveToFirst()== false) {
+            return -1;
+        }else{
+            return cursor.getInt(cursor.getColumnIndex(COL_ID));
+        }
+    }
 
     public String getItemName(int id){
         SQLiteDatabase db = this.getReadableDatabase();
