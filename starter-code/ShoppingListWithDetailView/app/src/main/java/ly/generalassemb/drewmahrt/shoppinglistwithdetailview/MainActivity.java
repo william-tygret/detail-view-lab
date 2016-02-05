@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mShoppingListView = (ListView)findViewById(R.id.shopping_list_view);
         mHelper = ShoppingSQLiteOpenHelper.getInstance(MainActivity.this);
 
-        final Cursor cursor = mHelper.getShoppingList();
+        Cursor cursor = mHelper.getShoppingList();
 
         mCursorAdapter = new SimpleCursorAdapter(this,android.R.layout.simple_list_item_1,cursor,new String[]{ShoppingSQLiteOpenHelper.COL_ITEM_NAME},new int[]{android.R.id.text1},0);
         mShoppingListView.setAdapter(mCursorAdapter);
@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
         mShoppingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = mCursorAdapter.getCursor();
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                //cursor.moveToPosition(position);
-                TextView textView = (TextView)view.findViewById(android.R.id.text1);
-                String itemName = textView.getText().toString();
-                int theID = ShoppingSQLiteOpenHelper.getInstance(MainActivity.this).getIdByName(itemName);
+                cursor.moveToPosition(position);
+                //TextView textView = (TextView)view.findViewById(android.R.id.text1);
+                //String itemName = textView.getText().toString();
+                int theID = cursor.getInt(cursor.getColumnIndex(ShoppingSQLiteOpenHelper.COL_ID));//ShoppingSQLiteOpenHelper.getInstance(MainActivity.this).getIdByName(itemName);
                 intent.putExtra("id", theID);
                 startActivity(intent);
             }
